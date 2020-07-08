@@ -5,32 +5,46 @@ import (
 	"fmt"
 )
 
+func QuickSort(nums []int) []int {
+    // 思路：把一个数组分为左右两段，左段小于右段
+    quickSort(nums, 0, len(nums)-1)
+    return nums
 
-
-func QuickSort(nums []int ) []int{
-
-	res := make([]int, 0)
-	left := make([]int, 0)
-	right := make([]int, 0)
-	end := len(nums)-1
-	pivot := nums[end]
-	for i := 0; i < len(nums)-1; i++ {
-		if nums[i] < pivot{
-			left = append(left, nums[i])
-		} else {
-			right = append(right, nums[i])
-		}
-	}
-	res = append(res, left...)
-	res = append(res, pivot)
-	res = append(res, right...)
-	return res
-
+}
+// 原地交换，所以传入交换索引
+func quickSort(nums []int, start, end int) {
+    if start < end {
+        // 分治法：divide
+        pivot := partition(nums, start, end)
+        quickSort(nums, 0, pivot-1)
+        quickSort(nums, pivot+1, end)
+    }
+}
+// 分区
+func partition(nums []int, start, end int) int {
+    // 选取最后一个元素作为基准pivot
+    p := nums[end]
+    i := start
+    // 最后一个值就是基准所以不用比较
+    for j := start; j < end; j++ {
+        if nums[j] < p {
+            swap(nums, i, j)
+            i++
+        }
+    }
+    // 把基准值换到中间
+    swap(nums, i, end)
+    return i
+}
+// 交换两个元素
+func swap(nums []int, i, j int) {
+    t := nums[i]
+    nums[i] = nums[j]
+    nums[j] = t
 }
 
 func main(){
-	nums := []int{1,3,5,7,0,9,2}
-	res := QuickSort(nums)
-	fmt.Println(res)
-
+	nums := []int{1,2,5,8,4,2,15}
+	QuickSort(nums)
+	fmt.Println(nums)
 }
