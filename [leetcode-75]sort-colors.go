@@ -22,7 +22,7 @@
 """
 
 
-
+// 1次遍历（计数）+ 1次遍历（填值）
 func sortColors(nums []int)  {
     count_0 := 0
     count_1 := 0
@@ -51,4 +51,23 @@ func sortColors(nums []int)  {
     }
     
     return 
+}
+
+// 双指针（交换0 2的位置）
+func sortColors(nums []int)  {
+    l := 0
+    r := len(nums)-1
+    for i:=0; i<=r; i++ {
+        if nums[i] == 0{
+            nums[i], nums[l] = nums[l], nums[i]
+            l += 1
+        }
+        if nums[i] == 2{
+            nums[i], nums[r] = nums[r], nums[i]
+            i -= 1
+            r -= 1
+        }
+    }
+    return 
+
 }
