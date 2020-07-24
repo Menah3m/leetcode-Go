@@ -32,15 +32,15 @@
 
 
 func removeElement(nums []int, val int) int {
-    var j int
-    for i:=0; i<len(nums); i++{
-        if nums[i] != val{
-            nums[j] = nums[i]
-            j++
-        } else {
+    slow := 0
+    for fast:=0; fast<len(nums); fast++{
+        if nums[fast] != val{
+            nums[slow] = nums[fast]
+            slow++
+        } else{
             continue
         }
     }
-    return j
+    return slow
 
 }
