@@ -20,7 +20,7 @@ a, b 均可能是负数或 0
 
 func add(a int, b int) int {
     for b != 0{
-        a, b = a ^ b, a & b << 1
+        a, b = a ^ b, a & b << 1 // a^b为非进位和，a&b<<1 为进位
     }
     return a
 }
